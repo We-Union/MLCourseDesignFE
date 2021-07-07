@@ -1,29 +1,29 @@
 <template>
   <div class="main">
    
-<Modal v-model="uploadRecordModal" :mask-closable="false" width="580">
 
 
       <div style="font-size:14px">
         <h3>录音时长：{{recorder&&recorder.duration}}</h3>
         <br />
-        <Button type="primary" @click="handleStart">开始录音</Button>
-        <Button type="info" @click="handlePause">暂停录音</Button>
-        <Button type="success" @click="handleResume">继续录音</Button>
-        <Button type="warning" @click="handleStop">停止录音</Button>
+        <el-button type="primary" @click="handleStart">开始录音</el-button>
+        <el-button type="info" @click="handlePause">暂停录音</el-button>
+        <el-button type="success" @click="handleResume">继续录音</el-button>
+        <el-button type="warning" @click="handleStop">停止录音</el-button>
         <br />
         <br />
         <h3>播放时长：{{recorder&&(playTime>recorder.duration?recorder.duration:playTime)}}</h3>
         <br />
-        <Button type="primary" @click="handlePlay">播放录音</Button>
-        <Button type="info" @click="handlePausePlay">暂停播放</Button>
-        <Button type="success" @click="handleResumePlay">继续播放</Button>
-        <Button type="warning" @click="handleStopPlay">停止播放</Button>
-        <Button type="error" @click="handleDestroy">销毁录音</Button>
+        <el-button type="primary" @click="handlePlay">播放录音</el-button>
+        <el-button type="info" @click="handlePausePlay">暂停播放</el-button>
+        <el-button type="success" @click="handleResumePlay">继续播放</el-button>
+        <el-button type="warning" @click="handleStopPlay">停止播放</el-button>
+        <el-button type="error" @click="handleDestroy">销毁录音</el-button>
       </div>
-        <Button style="margin-left:5px;" type="default" @click="uploadRecordModal=false">取消</Button>
-        <Button style="margin-left:5px;" type="primary" @click="uploadRecord">上传</Button>
-    </Modal>
+      <br>
+        <el-button style="margin-left:5px;" type="default" @click="uploadRecordModal=false">取消</el-button>
+        <el-button style="margin-left:5px;" type="primary" @click="uploadRecord">上传</el-button>
+
 
 
 

@@ -1,11 +1,19 @@
 <template>
-  <div class="main">
-   
+  <div class="workblock">
+      <br />
+      <el-row :gutter="10">
+        <el-col :span="1"></el-col>
+        <el-col :span="2">
+          <el-avatar :size="85" :font-size="35">Kirigaya</el-avatar>
+        </el-col>
+        <el-col :span="10"><h1>StupidChatBot1.0测试</h1></el-col>
+      </el-row>
 
-
+      <el-divider></el-divider>
       <div style="font-size:14px">
         <h3>录音时长：{{recorder&&recorder.duration}}</h3>
         <br />
+
         <el-button type="primary" @click="handleStart">开始录音</el-button>
         <el-button type="info" @click="handlePause">暂停录音</el-button>
         <el-button type="success" @click="handleResume">继续录音</el-button>
@@ -21,38 +29,59 @@
         <el-button type="error" @click="handleDestroy">销毁录音</el-button>
       </div>
       <br>
-        <el-button style="margin-left:5px;" type="default" @click="uploadRecordModal=false">取消</el-button>
         <el-button style="margin-left:5px;" type="primary" @click="uploadRecord">上传</el-button>
+        <el-button style="margin-left:5px;" type="default" @click="uploadRecordModal=false">取消</el-button>
+      <br />
+      <br />
 
+  <el-upload
+    class="upload-demo"
+    drag
+    action="/api/reply/"
+    name="file"
+    :on-success="success"
+    :on-error	="error"
+    :show-file-list="false"
+    >
+    <i class="el-icon-upload"></i>
+    <div class="el-upload__text">将wav文件拖到此处，或<em>点击上传</em></div>
+  </el-upload>
 
+  <el-divider></el-divider>
+  <el-row :gutter="10">
+    <el-col :span="7"></el-col>
+    <el-col :span="5"><el-tag size="100">语音识别结果</el-tag></el-col>
 
+    <el-col :span="5"><el-tag type="success">{{submit_words}}</el-tag></el-col>
+    <el-col :span="7"></el-col>
+  </el-row>
 
+  <br />
 
+  <el-row :gutter="10">
+    <el-col :span="7"></el-col>
+    <el-col :span="5"><el-tag type="warning">聊天机器人的回应</el-tag></el-col>
 
+    <el-col :span="5"><el-tag type="danger">{{return_words}}</el-tag></el-col>
+    <el-col :span="7"></el-col>
+  </el-row>
 
+  <br />
+  <br />
 
-
-
-       <el-upload
-  class="upload-demo"
-  drag
-  action="/api/reply/"
-  name="file"
-  :on-success="success"
-  :on-error	="error"
-  :show-file-list="false"
-  >
-  <i class="el-icon-upload"></i>
-  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-
-</el-upload>
-  <p>您说：{{submit_words}}</p>
-  <p>我说：{{return_words}}</p>
+  <div class="block" >
+    <span class="demonstration">打个分吧（反正打了我也不会看:D）</span>
+    <el-rate v-model="value1"></el-rate>
   </div>
+
+  </div>
+
+  
 </template>
 
+
 <script>
-  import { ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import Recorder from 'js-audio-recorder'
 import axios from 'axios'; 
 export default {
